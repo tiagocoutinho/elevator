@@ -1,27 +1,26 @@
 def solve():
     floors = 1, 2, 3, 4, 5
-    coopers = 2, 3, 4, 5
     bakers = 1, 2, 3, 4
+    coopers = 2, 3, 4, 5
     fletchers = 2, 3, 4
+    smiths = floors
 
-    def fletcher(fletcher, floors):
-        cooper = floors[1]
-        return fletcher not in (cooper - 1, cooper + 1)
-
-    def smith(smith, floors):
-        fletcher = floors[2]
-        return smith not in (fletcher - 1, fletcher + 1)
-
-    for s in floors:
+    for s in smiths:
         for c in coopers:
+            if c == s:
+                continue
             for b in bakers:
+                if b == c or b == s:
+                    continue
                 for f in fletchers:
+                    if f == b or f == c or f == s:
+                        continue
+                    if f == c - 1 or f == c + 1 or s == f - 1 or s == f + 1:
+                        continue
                     for m in floors[c:]:
-                        comb = (b, c, f, m, s)
-                        if len(set(comb)) != 5:
+                        if m == b or m == s or m == f:
                             continue
-                        if fletcher(f, comb) and smith(s, comb):
-                            return comb
+                        return b, c, f, m, s
 
 
 assert solve() == (3, 2, 4, 5, 1)
