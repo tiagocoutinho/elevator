@@ -21,11 +21,11 @@ def solve():
   fletchers = floors
   millers = floors
   smiths = floors
-  for b in bakers:
+  for s in smiths:
     for c in coopers:
-      for f in fletchers:
-        for m in millers:
-          for s in smiths:
+      for b in bakers:
+        for f in fletchers:
+          for m in millers:
             comb = (b, c, f, m, s)
             if len(set(comb)) != 5:
                 continue
